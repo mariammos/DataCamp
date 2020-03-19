@@ -1,0 +1,16 @@
+2. Taking note of dataset issues
+For the Super Bowl game data, we can see the dataset appears whole except for missing values in the backup quarterback columns (qb_winner_2 and qb_loser_2), which make sense given most starting QBs in the Super Bowl (qb_winner_1 and qb_loser_1) play the entire game.
+
+From the visual inspection of TV and halftime musicians data, there is only one missing value displayed, but I've got a hunch there are more. The Super Bowl goes all the way back to 1967, and the more granular columns (e.g. the number of songs for halftime musicians) probably weren't tracked reliably over time. Wikipedia is great but not perfect.
+
+An inspection of the .info() output for tv and halftime_musicians shows us that there are multiple columns with null values.
+
+CODE 
+
+# Summary of the TV data to inspect
+tv.info()
+
+print('\n')
+
+# Summary of the halftime musician data to inspect
+halftime_musicians.info()
