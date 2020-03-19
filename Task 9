@@ -1,0 +1,26 @@
+9. Who performed the most songs in a halftime show?
+The world famous Grambling State University Tiger Marching Band takes the crown with six appearances. Beyoncé, Justin Timberlake, Nelly, and Bruno Mars are the only post-Y2K musicians with multiple appearances (two each).
+
+From our previous inspections, the num_songs column has lots of missing values:
+
+A lot of the marching bands don't have num_songs entries.
+For non-marching bands, missing data starts occurring at Super Bowl XX.
+Let's filter out marching bands by filtering out musicians with the word "Marching" in them and the word "Spirit" (a common naming convention for marching bands is "Spirit of [something]"). Then we'll filter for Super Bowls after Super Bowl XX to address the missing data issue, then let's see who has the most number of songs.
+
+CODE
+
+# Filter out most marching bands
+no_bands = halftime_musicians[~halftime_musicians.musician.str.contains('Marching')]
+no_bands = no_bands[~no_bands.musician.str.contains('Spirit')]
+
+# Plot a histogram of number of songs per performance
+most_songs = int(max(no_bands['num_songs'].values))
+plt.hist(no_bands.num_songs.dropna(), bins=11)
+plt.xlabel('Number of Songs Per Halftime Show Performance')
+plt.ylabel('Number of Musicians')
+plt.show()
+
+# Sort the non-band musicians by number of songs per appearance...
+no_bands = no_bands.sort_values('num_songs', ascending=False)
+# ...and display the top 15
+display(no_bands.head(15))
